@@ -4,3 +4,5 @@ mysql/data
 www
 satis/composer/cache
 reveal/php-good-practice
+nginx/logs/
+redis/data

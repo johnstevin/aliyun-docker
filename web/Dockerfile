@@ -2,13 +2,13 @@ FROM php:5.6-fpm
 
 ADD sources.list /etc/apt/sources.list
 
+RUN apt-get update
+RUN apt-get install -y wget python2.7 python2.7-dev python-pip libmysqlclient-dev libxml2-dev libxslt1-dev mysql-client cron supervisor rsyslog libzip-dev libjpeg62-turbo-dev libpng12-dev libfreetype6-dev git
+
 # Install modules
-RUN docker-php-ext-install pdo_mysql mysql mysqli
+RUN docker-php-ext-install pdo_mysql mysql mysqli gd
 RUN pecl install xdebug
 RUN docker-php-ext-enable xdebug
-
-RUN apt-get update
-RUN apt-get install -y wget python2.7 python2.7-dev python-pip libmysqlclient-dev libxml2-dev libxslt1-dev mysql-client cron supervisor rsyslog libzip-dev
 
 RUN mkdir -p /var/log/supervisor
 

@@ -54,7 +54,7 @@ services:
       - ./web/supervisor:/etc/supervisor/conf.d
       - ./www:/var/www
       - ./web/composer:/root/.composer
-      - ~/.ssh:/root/.ssh
+      - ./ssh-outside:/root/.ssh
     environment:
         TZ: Asia/Chongqing
     restart: always

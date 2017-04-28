@@ -7,3 +7,4 @@ reveal/php-good-practice
 nginx/logs
 redis/data
 ssh-outside
+web/package

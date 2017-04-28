@@ -28,5 +28,16 @@ ADD php.ini          /usr/local/etc/php/php.ini
 #ADD php-fpm.conf    /usr/local/etc/php-fpm.conf
 ADD composer.phar    /usr/local/bin/composer
 
+COPY ./package/node-v6.10.1-linux-x64.tar.xz /root/
+
+RUN tar -Jxf /root/node-v6.10.1-linux-x64.tar.xz -C /root/ && \
+    mv /root/node-v6.10.1-linux-x64 /usr/local/node && \
+    rm -rf /root/node-v6.10.1-linux-x64.tar.xz
+    #echo 'export NODE_HOME=/usr/local/node' >> ~/.profile && \
+    #echo 'export PATH=$PATH:$NODE_HOME/bin' >> ~/.profile
+    #sh source ~/.profile
+ENV NODE_HOME /usr/local/node
+ENV PATH $PATH:$NODE_HOME/bin
 CMD ["/usr/bin/supervisord"]
+#CMD ["sh -c source ~/.profile"]
 WORKDIR /var/www

@@ -6,6 +6,7 @@ services:
     container_name: mysql
     ports:
       - "3306:3306"
+    hostname: docker-mysql
     volumes:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/etc/conf.d:/etc/mysql/conf.d
@@ -13,6 +14,9 @@ services:
     environment:
         TZ: Asia/Chongqing
     restart: always
+    networks:
+        default:
+            ipv4_address: 172.19.0.2
 
   nginx:
     image: nginx:1.9.8
@@ -20,6 +24,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    hostname: docker-nginx
     volumes:
       - ./nginx/etc/sites:/etc/nginx/sites
       - ./nginx/etc/conf.d:/etc/nginx/conf.d
@@ -36,6 +41,9 @@ services:
     environment:
         TZ: Asia/Chongqing
     restart: always
+    networks:
+        default:
+            ipv4_address: 172.19.0.3
 
   web:
     #image: php:5.6-fpm
@@ -47,6 +55,7 @@ services:
       # - beanstalkd
     ports:
       - "9009:9001"
+    hostname: docker-web
     volumes: 
       # - ./web/cron:/etc/pam.d/cron
       # - ./web/crontab:/etc/crontab
@@ -55,9 +64,14 @@ services:
       - ./www:/var/www
       - ./web/composer:/root/.composer
       - ./ssh-outside:/root/.ssh
+    extra_hosts:
+      - "svr.med3.docker:172.19.0.3"
     environment:
         TZ: Asia/Chongqing
     restart: always
+    networks:
+        default:
+            ipv4_address: 172.19.0.4
 
   # crawlers:
   #   build: ./www/crawlers
@@ -128,7 +142,21 @@ services:
         - ./redis/data:/data
     ports:
         - "6379:6379"
+    hostname: docker-redis
     environment:
         TZ: Asia/Chongqing
     restart: always
+    networks:
+      default:
+        ipv4_address: 172.19.0.5
 
+# networks:
+#     default:
+#         driver: bridge
+#         driver_opts:
+#             com.docker.network.enable_ipv6: "false"
+#         ipam:
+#             driver: default
+#             config:
+#             - subnet: 172.19.0.0/24
+#               gateway: 172.19.0.1

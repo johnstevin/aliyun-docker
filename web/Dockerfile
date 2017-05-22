@@ -23,6 +23,7 @@ RUN pip install beautifulsoup4 MySQL-python requests lxml html5lib python-dotenv
 
 RUN pecl install swoole 
 RUN pecl install zip
+RUN pecl install redis
 
 ADD php.ini          /usr/local/etc/php/php.ini
 #ADD php-fpm.conf    /usr/local/etc/php-fpm.conf

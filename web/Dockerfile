@@ -6,27 +6,19 @@ RUN apt-get update
 RUN apt-get install -y wget python2.7 python2.7-dev python-pip libmysqlclient-dev libxml2-dev libxslt1-dev mysql-client cron supervisor rsyslog libzip-dev libjpeg62-turbo-dev libpng12-dev libfreetype6-dev git
 
 # Install modules
-RUN docker-php-ext-install pdo_mysql mysql mysqli gd
-RUN pecl install xdebug
-RUN docker-php-ext-enable xdebug
-
-RUN mkdir -p /var/log/supervisor
-
-# Do following install tasks in /tmp
-#WORKDIR /tmp
-# Install latest pip
-#RUN wget https://bootstrap.pypa.io/get-pip.py
-#RUN python get-pip.py
-
-RUN pip install -U pip setuptools -i http://pypi.douban.com/simple 
-RUN pip install beautifulsoup4 MySQL-python requests lxml html5lib python-dotenv -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
-
-RUN pecl install swoole 
-RUN pecl install zip
-RUN pecl install redis
+RUN pecl install redis && docker-php-ext-enable redis \
+    && pecl install swoole && docker-php-ext-enable swoole \
+    && pecl install xdebug && docker-php-ext-enable xdebug \
+    && docker-php-ext-install zip pdo_mysql mysql mysqli gd
 
 ADD php.ini          /usr/local/etc/php/php.ini
 #ADD php-fpm.conf    /usr/local/etc/php-fpm.conf
+
+RUN mkdir -p /var/log/supervisor
+
+RUN pip install -U pip setuptools -i http://pypi.douban.com/simple
+RUN pip install beautifulsoup4 MySQL-python requests lxml html5lib python-dotenv -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+
 ADD composer.phar    /usr/local/bin/composer
 
 COPY ./package/node-v6.10.1-linux-x64.tar.xz /root/

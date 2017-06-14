@@ -8,3 +8,6 @@ nginx/logs
 redis/data
 ssh-outside
 web/package
+golang/package/*.*
+golang/log/*.log
+golang/log/supervisor/*

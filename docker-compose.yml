@@ -52,9 +52,11 @@ services:
     links:
       - redis
       - mysql
+      - golang
       # - beanstalkd
     ports:
       - "9009:9001"
+      - "9050:9050"
     hostname: docker-web
     volumes: 
       # - ./web/cron:/etc/pam.d/cron
@@ -72,6 +74,41 @@ services:
     networks:
         default:
             ipv4_address: 172.19.0.4
+
+  redis:
+    image: redis
+    container_name: redis
+    volumes:
+        - ./redis/data:/data
+    ports:
+        - "6379:6379"
+    hostname: docker-redis
+    environment:
+        TZ: Asia/Chongqing
+    restart: always
+    networks:
+      default:
+        ipv4_address: 172.19.0.5
+
+  golang:
+    build: ./golang
+    container_name: golang
+    ports:
+      - "2379:2379"
+    volumes:
+      - ./www/go:/go
+      - ./golang/log:/var/log
+      - ./golang/supervisor:/etc/supervisor/conf.d
+      - ./ssh-outside:/root/.ssh
+    hostname: docker-golang
+    #env_file: .env
+    environment:
+        TZ: Asia/Chongqing
+        #GOPATH: /var/www/go
+    restart: always
+    networks:
+      default:
+        ipv4_address: 172.19.0.6
 
   # crawlers:
   #   build: ./www/crawlers
@@ -134,21 +171,6 @@ services:
   #   volumes: 
   #     - ./gollum/wiki:/wiki
   #   restart: always
-
-  redis:
-    image: redis
-    container_name: redis
-    volumes:
-        - ./redis/data:/data
-    ports:
-        - "6379:6379"
-    hostname: docker-redis
-    environment:
-        TZ: Asia/Chongqing
-    restart: always
-    networks:
-      default:
-        ipv4_address: 172.19.0.5
 
 # networks:
 #     default:

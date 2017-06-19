@@ -68,6 +68,8 @@ services:
       - ./ssh-outside:/root/.ssh
     extra_hosts:
       - "svr.med3.docker:172.19.0.3"
+      - "svr.qa.medlinker.com:114.55.3.97"
+      - "push.med.qa:114.55.3.97"
     environment:
         TZ: Asia/Chongqing
     restart: always
@@ -95,6 +97,11 @@ services:
     container_name: golang
     ports:
       - "2379:2379"
+      - "8123:8123"
+      - "8124:8124"
+      - "8125:8125"
+      - "8130:8130"
+      - "8131:8131"
     volumes:
       - ./www/go:/go
       - ./golang/log:/var/log

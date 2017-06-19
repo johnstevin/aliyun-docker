@@ -13,5 +13,7 @@ ENV PATH $PATH:/usr/local/etcd
 
 EXPOSE 2379
 
+RUN apt-get install -y lsof beanstalkd
+
 #CMD ["/etc/init.d/ssh", "start -D"]
 CMD ["/usr/bin/supervisord"]

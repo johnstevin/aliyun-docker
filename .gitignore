@@ -12,3 +12,4 @@ golang/package/*.*
 golang/log/*.log
 golang/log/supervisor/*
 golang/log/apt/*
+ghost/

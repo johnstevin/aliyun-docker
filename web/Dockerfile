@@ -32,6 +32,11 @@ RUN tar -Jxf /root/node-v6.10.1-linux-x64.tar.xz -C /root/ && \
 ENV NODE_HOME /usr/local/node
 ENV PATH $PATH:$NODE_HOME/bin
 
+RUN apt-get install -y libmcrypt-dev
+RUN docker-php-ext-install mcrypt
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+RUN docker-php-ext-install gd
+
 ADD php.ini          /usr/local/etc/php/php.ini
 
 CMD ["/usr/bin/supervisord"]

@@ -56,8 +56,9 @@ services:
       - mongodb
       # - beanstalkd
     ports:
-      - "9009:9001"
+      - "9009:9001" #supervisord
       - "9050:9050"
+      - "9003:9003" #xdebug
     hostname: docker-web
     volumes: 
       # - ./web/cron:/etc/pam.d/cron
@@ -71,6 +72,7 @@ services:
       - "svr.med3.docker:172.19.0.3"
       - "svr.qa.medlinker.com:114.55.3.97"
       - "push.med.qa:114.55.3.97"
+      - "docker_host:10.0.4.126"
     environment:
         TZ: Asia/Chongqing
     restart: always

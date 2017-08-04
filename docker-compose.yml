@@ -35,7 +35,7 @@ services:
       - web
       # - phpmyadmin
       # - php-good-practice 
-      - ghost 
+      # - ghost 
       # - beanstalkd-console
       # - gollum
     environment:
@@ -52,7 +52,7 @@ services:
     links:
       - redis
       - mysql
-      - golang
+      # - golang
       - mongodb
       # - beanstalkd
     ports:
@@ -135,19 +135,19 @@ services:
       default:
         ipv4_address: 172.19.0.7
 
-  ghost:
-    image: ghost:0.11.10
-    container_name: ghost
-    volumes:
-      - ./ghost:/var/lib/ghost
-    ports:
-      - "2369:2368"
-    environment:
-      - NODE_ENV=production
-    restart: always
-    networks:
-      default:
-        ipv4_address: 172.19.0.8
+  # ghost:
+  #   image: ghost:0.11.10
+  #   container_name: ghost
+  #   volumes:
+  #     - ./ghost:/var/lib/ghost
+  #   ports:
+  #     - "2369:2368"
+  #   environment:
+  #     - NODE_ENV=production
+  #   restart: always
+  #   networks:
+  #     default:
+  #       ipv4_address: 172.19.0.8
 
   # crawlers:
   #   build: ./www/crawlers

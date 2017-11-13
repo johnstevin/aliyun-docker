@@ -1,6 +1,6 @@
 server {
-    server_name  laravel.med3.docker;
-    root         /var/www/med3/laravel/public;
+    server_name  laravel.docker;
+    root         /var/www/laravel/public;
 
     index index.html index.php;
 

@@ -14,7 +14,7 @@ RUN apt-get update \
 #RUN docker-php-ext-install zip pdo_mysql mysql mysqli gd bcmath mcrypt
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
-RUN docker-php-ext-install gd
+RUN docker-php-ext-install -j$(nproc) gd
 
 #ADD php-fpm.conf    /usr/local/etc/php-fpm.conf
 

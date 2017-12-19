@@ -21,6 +21,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      - "8089:8089"
     hostname: docker-nginx
     volumes:
       - ./nginx/etc/sites:/etc/nginx/sites
@@ -66,7 +67,7 @@ services:
       - "svr.med3.docker:172.19.0.3"
       - "svr.qa.medlinker.com:114.55.3.97"
       - "push.med.qa:114.55.3.97"
-      - "docker_host:10.0.4.126"
+      #- "docker_host:10.0.4.126"
     environment:
         TZ: Asia/Chongqing
     restart: always
@@ -83,31 +84,31 @@ services:
         TZ: Asia/Chongqing
     restart: always
 
-  # golang:
-  #   build: ./golang
-  #   container_name: golang
-  #   ports:
-  #     - "2379:2379" #etcd
-  #     # - "8123:8123"
-  #     # - "8124:8124"
-  #     # - "8125:8125"
-  #     # - "8130:8130"
-  #     # - "8131:8131"
-  #     - "8080:8080" #beego-project
-  #   volumes:
-  #     - ./www/go:/go
-  #     - ./golang/log:/var/log
-  #     - ./golang/supervisor:/etc/supervisor/conf.d
-  #     - ./ssh-outside:/root/.ssh
-  #   hostname: docker-golang
-  #   #env_file: .env
-  #   environment:
-  #       TZ: Asia/Chongqing
-  #       #GOPATH: /var/www/go
-  #   restart: always
-  #   networks:
-  #     default:
-  #       ipv4_address: 172.19.0.6
+  golang:
+    build: ./golang
+    container_name: golang
+    ports:
+      # - "2379:2379" #etcd
+      # - "8123:8123"
+      # - "8124:8124"
+      # - "8125:8125"
+      # - "8130:8130"
+      # - "8131:8131"
+      - "8080:8080" #beego-project
+    volumes:
+      - ./www_go:/go
+      - ./golang/log:/var/log
+      - ./golang/supervisor:/etc/supervisor/conf.d
+      # - ./ssh-outside:/root/.ssh
+    hostname: docker-golang
+    #env_file: .env
+    environment:
+        TZ: Asia/Chongqing
+        #GOPATH: /var/www/go
+    restart: always
+    # networks:
+    #   default:
+    #     ipv4_address: 172.19.0.6
 
   # mongodb:
   #   image: mongo

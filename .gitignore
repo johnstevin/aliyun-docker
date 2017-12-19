@@ -2,6 +2,7 @@
 ghost
 mysql/data
 www
+www_go
 satis/composer/cache
 reveal/php-good-practice
 nginx/logs

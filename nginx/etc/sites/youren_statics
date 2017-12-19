@@ -1,0 +1,25 @@
+server {
+    server_name  youren_statics.docker;
+    root         /var/www/uzee-static/public;
+
+    index index.html index.php;
+
+    location ^~  /upload { proxy_redirect off; proxy_pass http://youren_statics.docker; }
+    location ^~  /parse { proxy_redirect off; proxy_pass http://youren_statics.docker; }
+    location ^~  /export { proxy_redirect off; proxy_pass http://youren_statics.docker; }
+    location ^~  /api { proxy_redirect off; proxy_pass http://youren.docker; }
+
+#   return 202;
+
+    location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+    {
+        expires      30d;
+    }
+
+    location ~ .*\.(js|css)?$
+    {
+        expires      12h;
+    }
+
+    include includes/php_index;
+}

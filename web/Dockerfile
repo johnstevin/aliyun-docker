@@ -61,6 +61,7 @@ RUN wget http://pecl.php.net/get/swoole && pecl install -O swoole && docker-php-
 ENV NODE_HOME /usr/local/node
 ENV PATH $PATH:$NODE_HOME/bin
 
+RUN wget -P ./package/ https://npm.taobao.org/mirrors/node/v8.9.3/node-v8.9.3-linux-x64.tar.xz
 COPY ./package/node-v8.9.3-linux-x64.tar.xz /root/
 RUN tar -Jxf /root/node-v8.9.3-linux-x64.tar.xz -C /root/ && \
     mv /root/node-v8.9.3-linux-x64 /usr/local/node && \

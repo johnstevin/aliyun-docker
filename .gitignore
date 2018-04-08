@@ -9,6 +9,7 @@ nginx/logs
 redis/data
 ssh-outside
 web/package
+!web/package/.gitignore
 golang/package/*.*
 golang/log/*.log
 golang/log/supervisor/*

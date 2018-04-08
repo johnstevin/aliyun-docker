@@ -8,7 +8,7 @@ reveal/php-good-practice
 nginx/logs
 redis/data
 ssh-outside
-#web/package
+web/package
 !web/package/.gitignore
 golang/package/*.*
 golang/log/*.log

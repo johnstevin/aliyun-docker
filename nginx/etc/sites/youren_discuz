@@ -1,9 +1,0 @@
-server {
-    server_name  youren_discuz.docker;
-    root         /var/www/youren_discuz;
-    listen       8089;
-
-    index index.html index.php;
-
-    include includes/php;
-}

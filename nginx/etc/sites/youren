@@ -1,8 +1,0 @@
-server {
-    server_name  youren.docker;
-    root         /var/www/subvert3.0-freamwork/public;
-
-    index index.html index.php;
-
-    include includes/php_index;
-}

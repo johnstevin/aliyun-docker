@@ -36,14 +36,42 @@ ADD composer.phar    /usr/local/bin/composer
 ENV NODE_HOME /usr/local/node
 ENV PATH $PATH:$NODE_HOME/bin
 
-ADD php.ini          /usr/local/etc/php/php.ini
-RUN docker-php-ext-install zip pdo_mysql mysqli gd bcmath mcrypt
-RUN pecl install swoole && docker-php-ext-enable swoole
-RUN pecl install mongodb && docker-php-ext-enable mongodb
-RUN pecl install yac-2.0.2 && docker-php-ext-enable yac
-RUN pecl install redis && docker-php-ext-enable redis
-RUN pecl install inotify && docker-php-ext-enable inotify
+RUN docker-php-ext-install zip pdo_mysql mysqli bcmath mcrypt
+# JPEG Support enable
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd
+#RUN pecl install swoole && docker-php-ext-enable swoole
+#RUN pecl install mongodb && docker-php-ext-enable mongodb
+#RUN pecl install yac-2.0.2 && docker-php-ext-enable yac
+#RUN pecl install redis && docker-php-ext-enable redis
+#RUN pecl install inotify && docker-php-ext-enable inotify
+# pecl install <package> for error : No releases available for package "pecl.php.net/redis" 暂时无法解决
+RUN wget http://pecl.php.net/get/redis && pecl install -O redis && docker-php-ext-enable redis
+RUN wget http://pecl.php.net/get/xdebug && pecl install -O xdebug && docker-php-ext-enable xdebug
+RUN wget http://pecl.php.net/get/swoole && pecl install -O swoole && docker-php-ext-enable swoole
 #CMD ["/usr/bin/supervisord"]
 #CMD ["sh -c source ~/.profile"]
+
+#RUN tar -Jxf /root/node-v6.10.1-linux-x64.tar.xz -C /root/ && \
+#    mv /root/node-v6.10.1-linux-x64 /usr/local/node && \
+#    rm -rf /root/node-v6.10.1-linux-x64.tar.xz
+    #echo 'export NODE_HOME=/usr/local/node' >> ~/.profile && \
+    #echo 'export PATH=$PATH:$NODE_HOME/bin' >> ~/.profile
+    #sh source ~/.profile
+ENV NODE_HOME /usr/local/node
+ENV PATH $PATH:$NODE_HOME/bin
+
+COPY ./package/node-v8.9.3-linux-x64.tar.xz /root/
+RUN tar -Jxf /root/node-v8.9.3-linux-x64.tar.xz -C /root/ && \
+    mv /root/node-v8.9.3-linux-x64 /usr/local/node && \
+    rm -rf /root/node-v6.10.1-linux-x64.tar.xz
+    #echo 'export NODE_HOME=/usr/local/node' >> ~/.profile && \
+    #echo 'export PATH=$PATH:$NODE_HOME/bin' >> ~/.profile
+    #sh source ~/.profile
+ENV NODE_HOME /usr/local/node
+ENV PATH $PATH:$NODE_HOME/bin
+RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
+
+ADD php.ini          /usr/local/etc/php/php.ini
 
 WORKDIR /var/www

@@ -14,3 +14,4 @@ golang/log/*.log
 golang/log/supervisor/*
 golang/log/apt/*
 ghost/
+web/log

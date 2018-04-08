@@ -9,17 +9,21 @@ services:
     hostname: docker-mysql
     volumes:
       - ./mysql/data:/var/lib/mysql
-      - ./mysql/etc/conf.d:/etc/mysql/conf.d
+      - ./mysql/etc/conf.d:/etc/mysql/conf.d:ro
     env_file: .env
     environment:
         TZ: Asia/Chongqing
     restart: always
 
   nginx:
-    image: nginx:1.9.8
+    image: nginx:1.13
     container_name: nginx
     ports:
       - "80:80"
+      - "81:81" #aojia-service
+      - "82:82" #cms-service
+      - "83:83" #simple-shop  composer
+      - "84:84" #shop.docker
       - "443:443"
       - "8089:8089"
     hostname: docker-nginx
@@ -27,6 +31,7 @@ services:
       - ./nginx/etc/sites:/etc/nginx/sites
       - ./nginx/etc/conf.d:/etc/nginx/conf.d
       - ./nginx/etc/includes:/etc/nginx/includes
+      #- ./nginx/etc/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/logs:/var/log/nginx
       - ./www:/var/www
     links:
@@ -64,10 +69,31 @@ services:
       - ./web/composer:/root/.composer
       #- ./ssh-outside:/root/.ssh #windows10与docker的问题
     extra_hosts:
-      - "svr.med3.docker:172.19.0.3"
-      - "svr.qa.medlinker.com:114.55.3.97"
-      - "push.med.qa:114.55.3.97"
-      #- "docker_host:10.0.4.126"
+      - "you-local.aojiahome.com:172.16.100.6"
+      - "youservice-local.aojiahome.com:172.16.100.6"
+      - "youadmin-local.aojiahome.com:172.16.100.6"
+      - "youweb-local.aojiahome.com:172.16.100.6"
+      - "you1-local.aojiahome.com:172.16.100.6"
+      - "youservice1-local.aojiahome.com:172.16.100.6"
+      - "youadmin1-local.aojiahome.com:172.16.100.6"
+      - "youweb1-local.aojiahome.com:172.16.100.6"
+      - "shop-local.andaren.com:172.16.100.6"
+      - "shopservice-local.andaren.com:172.16.100.6"
+      - "shopadmin-local.andaren.com:172.16.100.6"
+      - "local.mutoulaile.com:172.16.100.6"
+      - "api-local.mutoulaile.com:172.16.100.6"
+      - "admin-local.mutoulaile.com:172.16.100.6"
+      - "pay-local.liweijia.com:172.16.100.6"
+      - "cmsservice-local.liweijia.com:172.16.100.6"
+      - "cmsadmin-local.liweijia.com:172.16.100.6"
+      - "ums-staging.aojiahome.com:182.92.69.56"
+      - "ums-staging.mutoulaile.com:182.92.69.56"
+      - "docker_host:172.16.100.6"
+      - "sales-local.liweijia.com:172.16.100.6"
+      - "shopweb-local.liweijia.com:172.16.100.6"
+      - "shopadmin-local.liweijia.com:172.16.100.6"
+      - "shopservice-local.liweijia.com:172.16.100.6"
+      - "shop-local.liweijia.com:172.16.100.6"
     environment:
         TZ: Asia/Chongqing
     restart: always
@@ -84,28 +110,28 @@ services:
         TZ: Asia/Chongqing
     restart: always
 
-  golang:
-    build: ./golang
-    container_name: golang
-    ports:
-      # - "2379:2379" #etcd
-      # - "8123:8123"
-      # - "8124:8124"
-      # - "8125:8125"
-      # - "8130:8130"
-      # - "8131:8131"
-      - "8080:8080" #beego-project
-    volumes:
-      - ./www_go:/go
-      - ./golang/log:/var/log
-      - ./golang/supervisor:/etc/supervisor/conf.d
-      # - ./ssh-outside:/root/.ssh
-    hostname: docker-golang
-    #env_file: .env
-    environment:
-        TZ: Asia/Chongqing
-        #GOPATH: /var/www/go
-    restart: always
+  # golang:
+  #   build: ./golang
+  #   container_name: golang
+  #   ports:
+  #     # - "2379:2379" #etcd
+  #     # - "8123:8123"
+  #     # - "8124:8124"
+  #     # - "8125:8125"
+  #     # - "8130:8130"
+  #     # - "8131:8131"
+  #     - "8080:8080" #beego-project
+  #   volumes:
+  #     - ./www_go:/go
+  #     - ./golang/log:/var/log
+  #     - ./golang/supervisor:/etc/supervisor/conf.d
+  #     # - ./ssh-outside:/root/.ssh
+  #   hostname: docker-golang
+  #   #env_file: .env
+  #   environment:
+  #       TZ: Asia/Chongqing
+  #       #GOPATH: /var/www/go
+  #   restart: always
     # networks:
     #   default:
     #     ipv4_address: 172.19.0.6

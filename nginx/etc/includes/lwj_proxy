@@ -1,0 +1,16 @@
+    location /services {
+       if ($host ~ (.*)\.liweijia\.com) {
+            proxy_pass http://admin-staging.liweijia.com$request_uri;
+       }
+       if ($host ~ (.*)\.aojiahome\.com) {
+            proxy_pass http://ums-staging.aojiahome.com$request_uri;
+       }
+    }
+    location /security {
+        if ($host ~ (.*)\.liweijia\.com) {
+            proxy_pass http://admin-staging.liweijia.com$request_uri;
+        }
+        if ($host ~ (.*)\.aojiahome\.com) {
+            proxy_pass http://ums-staging.aojiahome.com$request_uri;
+        }
+    }

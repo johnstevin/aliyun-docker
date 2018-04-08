@@ -1,0 +1,58 @@
+server {
+    listen 80;
+
+    server_name youadmin-local.aojiahome.com;
+    root "/var/www/liweijia/you.aojiahome.com/src/public";
+
+    index admin.php index.html index.htm index.php;
+
+    charset utf-8;
+
+    access_log /var/log/nginx/youadmin-access.log main;
+    error_log  /var/log/nginx/youadmin-error.log;
+
+    location / {
+        try_files $uri $uri/ /admin.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    sendfile off;
+
+    client_max_body_size 100m;
+
+    location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass web:9000;
+        fastcgi_index admin.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+
+    location /api {
+        proxy_set_header   Host    $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_pass http://youservice-local.aojiahome.com:81/api;
+    }
+
+    location /services {
+       if ($host ~ (.*)\.liweijia\.com) {
+            proxy_pass http://admin-staging.liweijia.com$request_uri;
+       }
+       if ($host ~ (.*)\.aojiahome\.com) {
+            proxy_pass http://ums-staging.aojiahome.com$request_uri;
+       }
+    }
+    location /security {
+        if ($host ~ (.*)\.liweijia\.com) {
+            proxy_pass http://admin-staging.liweijia.com$request_uri;
+        }
+        if ($host ~ (.*)\.aojiahome\.com) {
+            proxy_pass http://ums-staging.aojiahome.com$request_uri;
+        }
+    }
+
+}

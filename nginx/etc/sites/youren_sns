@@ -1,8 +1,0 @@
-server {
-    server_name  youren_sns.docker;
-    root         /var/www/youren_sns;
-
-    index index.html index.php;
-
-    include includes/php_index;
-}

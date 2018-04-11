@@ -26,6 +26,8 @@ services:
       - "84:84" #shop.docker
       - "443:443"
       - "8089:8089"
+      - "8080:8080" # third proxy nginx cms 
+      - "8081:8081" # third proxy nginx cms
     hostname: docker-nginx
     volumes:
       - ./nginx/etc/sites:/etc/nginx/sites
@@ -41,13 +43,15 @@ services:
       # - ghost 
       # - beanstalkd-console
       # - gollum
+    extra_hosts:
+      - "cmsadmin-domain-local.liweijia.com:172.18.0.6"
     environment:
         TZ: Asia/Chongqing
     restart: always
 
   web:
-    #image: php:5.6-fpm
-    build: ./web
+    image: registry.cn-hangzhou.aliyuncs.com/cool2rong/aliyun-docker-web
+    #build: ./web
     container_name: web
     links:
       - redis
@@ -59,6 +63,7 @@ services:
       - "9009:9001" #supervisord
       - "9050:9050"
       - "9003:9003" #xdebug
+      #- "8000:8000" #sales-php-ga fronend
     hostname: docker-web
     volumes: 
       # - ./web/cron:/etc/pam.d/cron
@@ -94,6 +99,7 @@ services:
       - "shopadmin-local.liweijia.com:172.16.100.6"
       - "shopservice-local.liweijia.com:172.16.100.6"
       - "shop-local.liweijia.com:172.16.100.6"
+      - "cmsadmin-domain-local.liweijia.com:172.16.100.6"
     environment:
         TZ: Asia/Chongqing
     restart: always

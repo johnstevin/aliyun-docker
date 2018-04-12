@@ -1,6 +1,6 @@
 server {
     listen 8080;
-    root "/var/www/liweijia/cms2.0/service/public";
+    root "/var/www/liweijia/cms-php/service/public";
 
     index index.html index.htm index.php;
 

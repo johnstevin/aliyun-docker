@@ -73,6 +73,7 @@ ENV NODE_HOME /usr/local/node
 ENV PATH $PATH:$NODE_HOME/bin
 RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
 RUN wget https://phar.phpunit.de/phpunit.phar \
+    && chmod +x phpunit.phar \
     && mv phpunit.phar /usr/local/bin/phpunit
 ADD php.ini          /usr/local/etc/php/php.ini
 

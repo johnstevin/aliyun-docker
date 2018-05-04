@@ -45,6 +45,8 @@ services:
       # - gollum
     extra_hosts:
       - "cmsadmin-domain-local.liweijia.com:172.18.0.6"
+      - "oms-api-staging.liweijia.com:182.92.69.56"
+      - "admin-staging.liweijia.com:182.92.69.56"
     environment:
         TZ: Asia/Chongqing
     restart: always
@@ -100,6 +102,13 @@ services:
       - "shopservice-local.liweijia.com:172.16.100.6"
       - "shop-local.liweijia.com:172.16.100.6"
       - "cmsadmin-domain-local.liweijia.com:172.16.100.6"
+      - "oms-api-staging.liweijia.com:182.92.69.56"
+      - "www-staging.liweijia.com:182.92.69.56"
+      - "webadmin-local.liweijia.com:172.16.100.6"
+      - "m-local.liweijia.com:172.16.100.6"
+      - "www-local.liweijia.com:172.16.100.6"
+      - "admin-staging.liweijia.com:182.92.69.56"
+      - "www-local.andaren.com:172.16.100.6"
     environment:
         TZ: Asia/Chongqing
     restart: always

@@ -1,6 +1,6 @@
 FROM php:7.1-fpm
 
-ADD sources.list /etc/apt/sources.list
+#ADD sources.list /etc/apt/sources.list
 
 RUN apt-get update \
     && apt-get install -y wget
@@ -9,7 +9,7 @@ RUN apt-get install -y python2.7-dev python-pip
 #RUN apt-get install -y libmysqlclient-dev
 #RUN apt-get install -y libxml2-dev libxslt1-dev 
 RUN apt-get install -y cron supervisor rsyslog
-RUN apt-get install -y libjpeg62-turbo-dev libpng12-dev 
+RUN apt-get install -y libjpeg62-turbo-dev 
 RUN apt-get install -y libfreetype6-dev git libssl-dev 
 RUN apt-get install -y pkg-config libmcrypt-dev
 
@@ -28,8 +28,8 @@ RUN docker-php-ext-install -j$(nproc) gd
 
 RUN mkdir -p /var/log/supervisor
 
-RUN pip install -U pip setuptools -i http://pypi.douban.com/simple
-RUN pip install beautifulsoup4 MySQL-python requests lxml html5lib python-dotenv -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+#RUN pip install -U pip setuptools -i http://pypi.douban.com/simple
+#RUN pip install beautifulsoup4 MySQL-python requests lxml html5lib python-dotenv -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
 
 ADD composer.phar    /usr/local/bin/composer
 

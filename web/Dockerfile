@@ -1,6 +1,6 @@
 FROM php:7.1-fpm
 
-ADD sources.list /etc/apt/sources.list
+#ADD sources.list /etc/apt/sources.list
 
 RUN apt-get update \
     && apt-get install -y wget

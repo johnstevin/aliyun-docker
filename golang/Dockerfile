@@ -1,5 +1,5 @@
 FROM golang
-ADD sources.list /etc/apt/sources.list
+#ADD sources.list /etc/apt/sources.list
 
 #COPY ./package/etcd-v3.1.8-linux-amd64.tar.gz /root/
 RUN apt-get update

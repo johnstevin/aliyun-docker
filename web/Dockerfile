@@ -1,6 +1,6 @@
 FROM php:7.1-fpm
 
-#ADD sources.list /etc/apt/sources.list
+ADD sources.list /etc/apt/sources.list
 
 RUN apt-get update \
     && apt-get install -y wget python2.7 python2.7-dev python-pip libmysqlclient-dev libxml2-dev libxslt1-dev mysql-client cron supervisor rsyslog libzip-dev libjpeg62-turbo-dev libpng12-dev libfreetype6-dev git libssl-dev pkg-config libmcrypt-dev

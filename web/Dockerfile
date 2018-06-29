@@ -8,7 +8,7 @@ RUN apt-get install -y python2.7-dev python-pip
 #RUN apt-get install -y zlib1g-dev
 #RUN apt-get install -y libmysqlclient-dev
 #RUN apt-get install -y libxml2-dev libxslt1-dev 
-RUN apt-get install -y mysql-client cron supervisor rsyslog libzip-dev 
+RUN apt-get install -y mysql-client-5.5 cron supervisor rsyslog
 RUN apt-get install -y libjpeg62-turbo-dev libpng12-dev 
 RUN apt-get install -y libfreetype6-dev git libssl-dev 
 RUN apt-get install -y pkg-config libmcrypt-dev

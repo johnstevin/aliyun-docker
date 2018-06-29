@@ -1,6 +1,6 @@
 server {
     server_name  laravel.docker;
-    root         /var/www/laravel/public;
+    root         /var/www/world/laravel/public;
 
     index index.html index.php;
 

@@ -16,3 +16,5 @@ golang/log/supervisor/*
 golang/log/apt/*
 ghost/
 web/log
+elasticsearch/data/*
+!elasticsearch/data/.gitignore

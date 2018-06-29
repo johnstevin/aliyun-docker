@@ -31,10 +31,6 @@ server {
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }
-    location /services {
-       proxy_pass http://admin-staging.liweijia.com/services;
-    }
-    location /security {
-        proxy_pass http://admin-staging.liweijia.com/security;
-    }
+    include includes/lwj_ums_proxy;
+
 }

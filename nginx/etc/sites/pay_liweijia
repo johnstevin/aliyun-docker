@@ -1,7 +1,7 @@
 server {
     listen       80;
     server_name  pay-local.liweijia.com;
-    root         /var/www/liweijia/pay.liweijia.com/public;
+    root         /var/www/liweijia/pay.liweijia.com/service/public;
 
     access_log   /var/log/nginx/pay-liweijia-access.log main;
     error_log    /var/log/nginx/pay-liweijia-error.log;

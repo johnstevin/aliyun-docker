@@ -1,0 +1,42 @@
+
+    set $umsHost http://182.92.69.56:28000;
+    if ($host ~ (.*)\.liweijia\.com) {
+         set $umsHost http://182.92.69.56:28000;
+    }
+    if ($host ~ (.*)\.andaren\.com) {
+        set $umsHost http://182.92.69.56:28010;
+    }
+    if ($host ~ (.*)\.aojiahome\.com) {
+        set $umsHost http://182.92.69.56:29020;
+    }
+    if ($host ~ (.*)\.mayimujiang\.com) {
+        set $umsHost http://182.92.69.56:29010;
+    }
+    if ($host ~ (.*)\.mutoulaile\.com) {
+        set $umsHost http://182.92.69.56:29030;
+    }
+    if ($host ~ (.*)\.tommyao\.com) {
+        set $umsHost http://182.92.69.56:29000;
+    }
+
+    location /services/ {
+        proxy_pass  $umsHost$request_uri;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+     }
+
+    location /security/ {
+
+        set  $umsUrl  $umsHost/auth/login;
+        if ( $request_uri ~ ^\\/security(.*) ) {
+            set  $umsUrl  $umsHost$1;
+        }
+
+        proxy_pass $umsUrl;
+        proxy_set_header Host $host/security;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+

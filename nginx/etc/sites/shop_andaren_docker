@@ -1,8 +1,8 @@
 server {
     listen 80;
 
-    server_name shop-local.liweijia.com you-local.aojiahome.com;
-    root "/var/www/liweijia/shop-php/src/public";
+    server_name shop-andaren-local.liweijia.com;
+    root "/var/www/liweijia/site-andaren-shop/src/public";
 
     index mobile.php index.html index.htm index.php;
 
@@ -42,5 +42,11 @@ server {
         proxy_pass http://shopservice-local.liweijia.com:84/api;
     }
 
-    include includes/lwj_ums_proxy;
+
+    location /services {
+       proxy_pass http://admin-staging.liweijia.com/services;
+    }
+    location /security {
+        proxy_pass http://admin-staging.liweijia.com/security;
+    }
 }

@@ -66,6 +66,9 @@ services:
       - "9050:9050"
       - "9003:9003" #xdebug
       #- "8000:8000" #sales-php-ga fronend
+      - "9501:9501"
+      - "9502:9502"
+      - "8000:8000"
     hostname: docker-web
     volumes: 
       # - ./web/cron:/etc/pam.d/cron
@@ -103,6 +106,7 @@ services:
       - "shop-local.liweijia.com:172.16.100.6"
       - "cmsadmin-domain-local.liweijia.com:172.16.100.6"
       - "oms-api-staging.liweijia.com:182.92.69.56"
+      - "api-staging.liweijia.com:182.92.69.56"
       - "www-staging.liweijia.com:182.92.69.56"
       - "webadmin-local.liweijia.com:172.16.100.6"
       - "m-local.liweijia.com:172.16.100.6"
@@ -123,6 +127,27 @@ services:
     hostname: docker-redis
     environment:
         TZ: Asia/Chongqing
+    restart: always
+
+  elasticsearch:
+    build: ./elasticsearch
+    container_name: elasticsearch
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+    environment:
+      - cluster.name=laradock-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 1024m
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    depends_on:
+      - web
     restart: always
 
   # golang:

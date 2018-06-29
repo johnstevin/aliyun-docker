@@ -2,7 +2,7 @@ server {
     listen 80;
 
     server_name cmsadmin-local.liweijia.com;
-    root "/var/www/liweijia/cms2.0/src/public";
+    root "/var/www/liweijia/cms-php/src/public";
 
     index admin.php index.html index.htm index.php;
 

@@ -41,7 +41,7 @@ RUN docker-php-ext-install zip pdo_mysql mysqli bcmath mcrypt
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd
 #RUN pecl install swoole && docker-php-ext-enable swoole
-#RUN pecl install mongodb && docker-php-ext-enable mongodb
+RUN pecl install mongodb && docker-php-ext-enable mongodb
 #RUN pecl install yac-2.0.2 && docker-php-ext-enable yac
 #RUN pecl install redis && docker-php-ext-enable redis
 #RUN pecl install inotify && docker-php-ext-enable inotify

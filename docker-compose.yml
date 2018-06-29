@@ -59,7 +59,7 @@ services:
       - redis
       - mysql
       # - golang
-      # - mongodb
+      - mongodb
       # - beanstalkd
     ports:
       - "9009:9001" #supervisord
@@ -176,20 +176,20 @@ services:
     #   default:
     #     ipv4_address: 172.19.0.6
 
-  # mongodb:
-  #   image: mongo
-  #   container_name: mongodb
-  #   ports:
-  #     - "27017:27017"
-  #   volumes:
-  #     - ./mongodb/data:/data
-  #   hostname: docker-mongodb
-  #   environment:
-  #     TZ: Asia/Chongqing
-  #   restart: always
-  #   networks:
-  #     default:
-  #       ipv4_address: 172.19.0.7
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodb/data:/data
+    hostname: docker-mongodb
+    environment:
+      TZ: Asia/Chongqing
+    restart: always
+    # networks:
+    #   default:
+    #     ipv4_address: 172.19.0.7
 
   # ghost:
   #   image: ghost:0.11.10

@@ -77,5 +77,6 @@ RUN wget https://phar.phpunit.de/phpunit.phar \
     && mv phpunit.phar /usr/local/bin/phpunit
 RUN docker-php-ext-install pcntl
 ADD php.ini  /usr/local/etc/php/php.ini
+RUN npm install --global gulp
 
 WORKDIR /var/www

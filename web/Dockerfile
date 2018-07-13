@@ -14,6 +14,7 @@ RUN apt-get install -y libfreetype6-dev git libssl-dev
 RUN apt-get install -y pkg-config libmcrypt-dev
 #RUN apt-get install -y libpng12-0
 
+
 # Install modules
 #RUN pecl install redis
     #&& docker-php-ext-enable redis

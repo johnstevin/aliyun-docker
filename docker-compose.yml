@@ -69,6 +69,7 @@ services:
       - "9501:9501"
       - "9502:9502"
       - "8000:8000"
+      - "8001:8001"
     hostname: docker-web
     volumes: 
       # - ./web/cron:/etc/pam.d/cron

@@ -151,28 +151,30 @@ services:
       - web
     restart: always
 
-  # golang:
-  #   build: ./golang
-  #   container_name: golang
-  #   ports:
-  #     # - "2379:2379" #etcd
-  #     # - "8123:8123"
-  #     # - "8124:8124"
-  #     # - "8125:8125"
-  #     # - "8130:8130"
-  #     # - "8131:8131"
-  #     - "8080:8080" #beego-project
-  #   volumes:
-  #     - ./www_go:/go
-  #     - ./golang/log:/var/log
-  #     - ./golang/supervisor:/etc/supervisor/conf.d
-  #     # - ./ssh-outside:/root/.ssh
-  #   hostname: docker-golang
-  #   #env_file: .env
-  #   environment:
-  #       TZ: Asia/Chongqing
-  #       #GOPATH: /var/www/go
-  #   restart: always
+  golang:
+    image: registry.cn-hangzhou.aliyuncs.com/cool2rong/aliyun-docker-golang
+    container_name: golang
+    ports:
+      # - "2379:2379" #etcd
+      # - "8123:8123"
+      # - "8124:8124"
+      # - "8125:8125"
+      # - "8130:8130"
+      # - "8131:8131"
+      - "8050:8080" #beego-project
+    volumes:
+      - ./www_go:/go
+      - ./golang/log:/var/log
+      - ./golang/supervisor:/etc/supervisor/conf.d
+      # - ./ssh-outside:/root/.ssh
+    hostname: docker-golang
+    #env_file: .env
+    environment:
+        TZ: Asia/Chongqing
+        #GOPATH: /var/www/go
+    depends_on:
+      - mysql
+    restart: always
     # networks:
     #   default:
     #     ipv4_address: 172.19.0.6

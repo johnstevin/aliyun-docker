@@ -14,6 +14,8 @@ RUN mkdir -p /var/log/supervisor
 #EXPOSE 2379
 
 RUN apt-get install -y lsof
+RUN export GOROOT=/usr/local/go \
+	&& export PATH=$PATH:$GOROOT/bin
 
 #CMD ["/etc/init.d/ssh", "start -D"]
 CMD ["/usr/bin/supervisord"]

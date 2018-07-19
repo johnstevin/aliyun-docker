@@ -1,8 +1,0 @@
-server {
-    server_name  vd.med3.docker;
-    root         /var/www/med3/vd/public;
-
-    index index.html index.php;
-
-    include includes/php_index;
-}

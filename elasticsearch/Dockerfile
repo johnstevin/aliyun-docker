@@ -1,7 +1,7 @@
 FROM elasticsearch:5.1.1
 
 EXPOSE 9200 9300
-ADD sources.list /etc/apt/sources.list
+#ADD sources.list /etc/apt/sources.list
 #RUN ./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v5.1.1/elasticsearch-analysis-ik-5.1.1.zip
 #RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 RUN apt-get update && apt-get install zip

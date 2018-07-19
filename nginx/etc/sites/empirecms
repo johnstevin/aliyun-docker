@@ -1,8 +1,0 @@
-server {
-    server_name  empirecms.docker;
-    root         /var/www/empirecms;
-
-    index index.html index.php;
-
-    include includes/php;
-}

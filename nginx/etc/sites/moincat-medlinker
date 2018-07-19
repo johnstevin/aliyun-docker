@@ -1,8 +1,0 @@
-server {
-    server_name  moincat-medlinker.med3.docker;
-    root         /var/www/med3/moincat-medlinker/public;
-
-    index index.html index.php;
-
-    include includes/php_index;
-}

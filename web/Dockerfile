@@ -57,7 +57,7 @@ RUN pecl install mongodb && docker-php-ext-enable mongodb
 #RUN pecl install inotify && docker-php-ext-enable inotify
 # pecl install <package> for error : No releases available for package "pecl.php.net/redis" 暂时无法解决
 RUN wget http://pecl.php.net/get/redis && pecl install -O redis && docker-php-ext-enable redis
-RUN wget http://pecl.php.net/get/xdebug && pecl install -O xdebug && docker-php-ext-enable xdebug
+#RUN wget http://pecl.php.net/get/xdebug && pecl install -O xdebug && docker-php-ext-enable xdebug
 RUN wget http://pecl.php.net/get/swoole && pecl install -O swoole && docker-php-ext-enable swoole
 #CMD ["/usr/bin/supervisord"]
 #CMD ["sh -c source ~/.profile"]

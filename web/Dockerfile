@@ -81,7 +81,7 @@ RUN tar -Jxf /root/node-v8.9.3-linux-x64.tar.xz -C /root/ && \
     #sh source ~/.profile
 ENV NODE_HOME /usr/local/node
 ENV PATH $PATH:$NODE_HOME/bin
-RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
+#RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
 RUN wget https://phar.phpunit.de/phpunit.phar \
     && chmod +x phpunit.phar \
     && mv phpunit.phar /usr/local/bin/phpunit

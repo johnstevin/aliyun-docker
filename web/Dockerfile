@@ -12,6 +12,7 @@ RUN apt-get install -y cron supervisor rsyslog
 RUN apt-get install -y libjpeg62-turbo-dev 
 RUN apt-get install -y libfreetype6-dev git libssl-dev 
 RUN apt-get install -y pkg-config libmcrypt-dev
+RUN apt-get install -y vim
 #RUN apt-get install -y libpng12-0
 
 

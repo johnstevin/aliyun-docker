@@ -52,7 +52,7 @@ services:
     restart: always
 
   web:
-    image: registry.cn-hangzhou.aliyuncs.com/cool2rong/aliyun-docker-web
+    image: registry.cn-hangzhou.aliyuncs.com/cool2rong/aliyun-docker-web:1.0.2
     #build: ./web
     container_name: web
     links:
@@ -76,7 +76,7 @@ services:
       # - ./web/crontab:/etc/crontab
       - ./web/log:/var/log
       - ./web/supervisor:/etc/supervisor/conf.d
-      - ./www:/var/www
+      - ./www:/var/www:cached
       - ./web/composer:/root/.composer
       #- ./ssh-outside:/root/.ssh #windows10与docker的问题
     extra_hosts:

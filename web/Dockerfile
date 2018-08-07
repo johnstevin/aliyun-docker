@@ -89,5 +89,6 @@ RUN wget https://phar.phpunit.de/phpunit.phar \
 RUN docker-php-ext-install pcntl
 ADD php.ini  /usr/local/etc/php/php.ini
 RUN npm install --global gulp
+RUN apt-get install -y tcpdump procps
 
 WORKDIR /var/www

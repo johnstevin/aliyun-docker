@@ -119,7 +119,7 @@ services:
     restart: always
 
   redis:
-    image: redis
+    image: redis:4.0.11-alpine
     container_name: redis
     volumes:
         - ./redis/data:/data
@@ -128,6 +128,8 @@ services:
     hostname: docker-redis
     environment:
         TZ: Asia/Chongqing
+    command: >
+      --requirepass 123456 
     restart: always
 
   elasticsearch:

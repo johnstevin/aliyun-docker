@@ -60,7 +60,7 @@ RUN pecl install mongodb && docker-php-ext-enable mongodb
 RUN wget http://pecl.php.net/get/redis && pecl install -O redis && docker-php-ext-enable redis
 #RUN wget http://pecl.php.net/get/xdebug && pecl install -O xdebug && docker-php-ext-enable xdebug
 RUN wget http://pecl.php.net/get/swoole && pecl install -O swoole && docker-php-ext-enable swoole
-#CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord"]
 #CMD ["sh -c source ~/.profile"]
 
 #RUN tar -Jxf /root/node-v6.10.1-linux-x64.tar.xz -C /root/ && \

@@ -1,22 +1,23 @@
 server {
-    listen 80;
+    server_name sales-order-service-local.liweijia.com;
+    root "/var/www/liweijia/sales-order-service-php/service/public";
 
-    server_name www-local.andaren.com;
-    root "/var/www/liweijia/site_andaren_www/service/public";
-
-    index admin.php index.html index.htm index.php;
+    index index.html index.htm index.php;
 
     charset utf-8;
-
-    access_log /var/log/nginx/www-local.andaren.com-access.log main;
-    error_log  /var/log/nginx/www-local.andaren.com-error.log;
+    access_log /var/log/nginx/sales-order-service-access.log main;
+    error_log  /var/log/nginx/sales-order-service-error.log;
 
     location / {
-        try_files $uri $uri/ /admin.php?$query_string;
+        try_files $uri $uri/ /index.php?$query_string;
+        if ($host ~ webimg-handle.liweijia.com) {
+                proxy_pass http://$host&$args;
+        }
     }
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location = /robots.txt  { access_log off; log_not_found off; }
+
 
     sendfile off;
 
@@ -29,6 +30,6 @@ server {
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }
+    include includes/lwj_ums_proxy;
 
-    include includes/lwj_proxy;
 }

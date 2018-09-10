@@ -18,3 +18,4 @@ ghost/
 web/log
 elasticsearch/data/*
 !elasticsearch/data/.gitignore
+mongodb/data/*

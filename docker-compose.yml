@@ -52,7 +52,7 @@ services:
     restart: always
 
   web:
-    image: registry.cn-hangzhou.aliyuncs.com/cool2rong/aliyun-docker-web:1.0.3
+    image: registry.cn-hangzhou.aliyuncs.com/cool2rong/aliyun-docker-web:1.0.4
     #build: ./web
     container_name: web
     links:
